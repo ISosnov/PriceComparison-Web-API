@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Domain.Models.DBModels
 {
@@ -11,6 +12,7 @@ namespace Domain.Models.DBModels
 
         public string? ImageUrl { get; set; }
 
+        [JsonIgnore]
         public int? ParentCategoryId { get; set; }
         public virtual CategoryDBModel? ParentCategory { get; set; }
 

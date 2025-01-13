@@ -6,8 +6,12 @@ var configureService = new ConfigurationService(builder);
 configureService.ConfigureService();
 
 // Add services to the container.
-
-builder.Services.AddControllers();
+//Added ReferenceHandler для циклічних посилань
+builder.Services.AddControllers()
+     .AddJsonOptions(options =>
+     {
+         options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+     });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
