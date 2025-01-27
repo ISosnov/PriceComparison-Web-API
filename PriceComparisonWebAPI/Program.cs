@@ -1,3 +1,4 @@
+using Microsoft.Extensions.FileProviders;
 using PriceComparisonWebAPI.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,12 +27,13 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(builder.Environment.ContentRootPath, "Media", "Images")),
+    RequestPath = "/images"
+});
+
 app.MapControllers();
 
 app.Run();
-
-
-// 1. Install packages
-// 2. Change user model
-// 3. Change context
-// 4. Configure JWT 
